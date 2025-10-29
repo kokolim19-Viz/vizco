@@ -54,8 +54,9 @@
     <!-- Navigation Bar (Sticky and Clean) -->
     <nav class="sticky top-0 z-50 bg-white shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary-navy">
-                V<span class="text-accent-gold">I</span>Z Corp
+            <!-- Updated: Replaced text logo with uploaded image logo -->
+            <a href="#">
+                <img src="images/vizlogo.jpg" alt="Viz Corporate Services Logo" class="h-10 w-auto">
             </a>
             <div class="hidden md:flex space-x-8 font-semibold">
                 <a href="#services" class="text-primary-navy hover:text-accent-gold transition duration-300">Services</a>
@@ -305,28 +306,6 @@
             const animationDuration = 3000; // 3 seconds
             const startTime = performance.now();
 
-            const countUp = (element, targetValue, symbol) => {
-                const step = (currentTime) => {
-                    const elapsedTime = currentTime - startTime;
-                    const progress = Math.min(1, elapsedTime / animationDuration);
-                    
-                    // Use a smooth easing function (e.g., cubic ease-out)
-                    const easedProgress = 1 - Math.pow(1 - progress, 3); 
-                    
-                    let currentValue = Math.floor(easedProgress * targetValue);
-
-                    if (progress < 1) {
-                        element.textContent = currentValue + symbol;
-                        window.requestAnimationFrame(step);
-                    } else {
-                        // Ensure it hits the final value exactly
-                        element.textContent = targetValue + symbol;
-                    }
-                };
-
-                window.requestAnimationFrame(step);
-            };
-
             const counters = document.querySelectorAll('.counter-value');
             const trustSection = document.getElementById('trust');
             let hasAnimated = false;
@@ -338,14 +317,18 @@
                             counters.forEach(counter => {
                                 const target = parseInt(counter.getAttribute('data-target'));
                                 const symbol = counter.getAttribute('data-symbol') || '';
+                                
                                 // Reset startTime for each counter animation to start fresh
                                 const counterStartTime = performance.now(); 
+                                
                                 const countUpForCounter = (counter, targetValue, symbol) => {
                                     const step = (currentTime) => {
                                         const elapsedTime = currentTime - counterStartTime;
                                         const progress = Math.min(1, elapsedTime / animationDuration);
                                         const easedProgress = 1 - Math.pow(1 - progress, 3);
+                                        
                                         let currentValue = Math.floor(easedProgress * targetValue);
+                                        
                                         if (progress < 1) {
                                             counter.textContent = currentValue + symbol;
                                             window.requestAnimationFrame(step);
